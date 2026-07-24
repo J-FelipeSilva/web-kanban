@@ -154,3 +154,38 @@ function varrer() {
 	varrerQuadro.forEach(contador);
 }
 document.addEventListener("DOMContentLoaded", varrer);
+
+function salvarDados() {
+	const colunas = document.querySelectorAll(".coluna");
+	const dadosKanban = [];
+	
+	//função que vai guardar cada coluna individualmente
+	function processarTrabalho(coluna) {
+		const id = coluna.id;
+		const titulo = coluna.querySelector(".header span:first-child").innerText;
+		const posts = coluna.querySelectorAll(".post");
+		const tarefas = [];
+		
+		//guarda que vai guardar todas os post individualmente
+		function processarTarefa(post) {
+			tarefas.push({
+				id: post.id,
+				texto: post.querySelector("span").innerText
+			});
+		}
+		posts.forEach(processarTarefa);
+		
+		//estrutura os dados no array
+		dadosKanban.push({
+			id, titulo, tarefas
+		});
+	}
+	colunas.forEach(processarTrabalho);
+	
+	//salva no localStorage
+	localStorage.setItem("meuKanban", JSON.stringify(dadosKanban));
+}
+
+function carregarDados() {
+	
+}
