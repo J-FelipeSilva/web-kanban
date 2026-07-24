@@ -2,7 +2,7 @@
 <html lang="pt-BR"> <!--o atributo lang define o idioma do documento como português do Brasil-->
 	<head>
 		<meta charset="UTF-8"> <!--garante que o navegador interprete corretamente os caracteres especiais do documento-->
-		<meta name="viewport" content="width=device-width, inicial-scale=1.0"> <!--garante que o layout seja responsivo-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--garante que o layout seja responsivo-->
 		<title>Kanban Web</title>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -25,7 +25,7 @@
 				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 					<div id="tarefa-3" class="post" draggable="true" ondragstart="dragstartHandler(event)">
 						<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
-						<span>AJAX & webStorageAPI</span>
+						<span>webStorageAPI</span>
 					</div>
 				</div>
 				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
