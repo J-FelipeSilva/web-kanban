@@ -117,7 +117,6 @@ function criarFluxoDeTrabalho() {
 	newButtonEditor.setAttribute("onclick", "editarColuna(this)");
 	newButtonEditor.innerHTML = "<i class=\"material-icons\">edit</i>";
 	newHeader.appendChild(newButtonEditor);
-	
 	salvarDados();
 }
 
@@ -130,7 +129,6 @@ function editarColuna(buttonElement) {
 	input.value = spanApontado.innerText;
 	//executa o display que foi construido no html
 	display.showModal();
-	
 	salvarDados();
 }
 function salvarColuna() {
