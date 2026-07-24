@@ -117,6 +117,7 @@ function criarFluxoDeTrabalho() {
 	newButtonEditor.setAttribute("onclick", "editarColuna(this)");
 	newButtonEditor.innerHTML = "<i class=\"material-icons\">edit</i>";
 	newHeader.appendChild(newButtonEditor);
+	
 	salvarDados();
 }
 
@@ -129,17 +130,18 @@ function editarColuna(buttonElement) {
 	input.value = spanApontado.innerText;
 	//executa o display que foi construido no html
 	display.showModal();
-	salvarDados();
 }
 function salvarColuna() {
 	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
 		document.getElementById("janela-editar-coluna").close();
 	}
+	salvarDados();
 }
 function excluirColuna() {
 	colunaApontada.remove();
 	document.getElementById("janela-editar-coluna").close();
+	salvarDados();
 }
 function cancelar() {
 	document.getElementById("janela-editar-coluna").close();
@@ -151,6 +153,7 @@ function excluirTarefa(buttonElement) {
 	post.remove();
 	//atualiza o contador da coluna
 	contador(coluna);
+	salvarDados();
 }
 
 function varrer() {
