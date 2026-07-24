@@ -30,7 +30,8 @@ function dropHandler(event) {
 			contador(colunaInicial);
 			contador(colunaFinal);
 		}
-	} 
+	}
+	salvarDados();
 }
 
 function criarTarefa(buttonElement) {
@@ -63,6 +64,7 @@ function criarTarefa(buttonElement) {
 		colunaCerta.appendChild(newDiv);
 		contador(coluna); //atualiza o contador da coluna
 	}
+	salvarDados();
 }
 
 function criarFluxoDeTrabalho() {
@@ -115,6 +117,8 @@ function criarFluxoDeTrabalho() {
 	newButtonEditor.setAttribute("onclick", "editarColuna(this)");
 	newButtonEditor.innerHTML = "<i class=\"material-icons\">edit</i>";
 	newHeader.appendChild(newButtonEditor);
+	
+	salvarDados();
 }
 
 function editarColuna(buttonElement) {
@@ -126,6 +130,8 @@ function editarColuna(buttonElement) {
 	input.value = spanApontado.innerText;
 	//executa o display que foi construido no html
 	display.showModal();
+	
+	salvarDados();
 }
 function salvarColuna() {
 	if (input.value.trim()!=="") {
@@ -153,7 +159,6 @@ function varrer() {
 	const varrerQuadro = document.querySelectorAll(".coluna");
 	varrerQuadro.forEach(contador);
 }
-document.addEventListener("DOMContentLoaded", varrer);
 
 function salvarDados() {
 	const colunas = document.querySelectorAll(".coluna");
@@ -187,5 +192,50 @@ function salvarDados() {
 }
 
 function carregarDados() {
+	//se não houver dados salvos, inicia a página na configuração escrita no html
+	const dadosSalvos = localStorage.getItem("meuKanban");
+	if (!dadosSalvos) {
+		varrer();
+		return;
+	}
 	
+	//converte de JSON para um array de objetos que o navegador conseguirá interpretar
+	const dadosKanban = JSON.parse(dadosSalvos);
+	const quadro = document.getElementById("quadro");
+	//limpa o quadro para carregar a configuração salva
+	quadro.innerHTML = "";
+	
+	//recria os elementos HTML
+	function dadosColuna(coluna) {
+		function dadosTarefa(post) {
+			//o sinal de crase serve pra poder quebrar linhas e inserir informações ${}
+			tarefasHtml += `
+				<div id="${post.id}" class="post" draggable="true" ondragstart="dragstartHandler(event)">
+					<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+					<span>${post.texto}</span>
+				</div>
+			`;
+		}
+		
+		//variável para juntar os post-its da cada coluna
+		let tarefasHtml = "";
+		coluna.tarefas.forEach(dadosTarefa);
+		const colunaHtml = `
+			<div id="${coluna.id}" class="coluna">
+				<div class="header">
+					<span>${coluna.titulo}</span>
+					<span class="contador">${coluna.tarefas.length}</span>
+					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+				</div>
+				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+					${tarefasHtml}
+				</div>
+				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+			</div>
+		`;
+		quadro.insertAdjacentHTML("beforeend", colunaHtml);
+	}
+	dadosKanban.forEach(dadosColuna);
+	console.log("informações recuperadas com sucesso:", dadosKanban);
 }
+document.addEventListener("DOMContentLoaded", carregarDados);
