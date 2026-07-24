@@ -128,7 +128,7 @@ function editarColuna(buttonElement) {
 	display.showModal();
 }
 function salvarColuna() {
-	if(input.value.trim()!==""){
+	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
 		document.getElementById("janela-editar-coluna").close();
 	}
