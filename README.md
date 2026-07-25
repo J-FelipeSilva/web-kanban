@@ -1,5 +1,5 @@
 # Projeto Web Kanban
-O projeto visa criar um gerenciador de tarefas no estilo Kanban incorporando uma IA para sugerir sprints.
+O projeto visa criar um gerenciador de tarefas no estilo kanban incorporando uma IA para sugerir sprints.
 
 ## Funcionalidades
 * **Quadro Kanban Interativo:** adicionar, editar, excluir e visualizar tarefas, arrastar tarefas entre colunas como os post-its em papel;
