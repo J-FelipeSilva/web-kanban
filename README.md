@@ -2,9 +2,9 @@
 O projeto visa criar um gerenciador de tarefas no estilo Kanban incorporando uma IA para sugerir sprints.
 
 ## Funcionalidades
-1.**Quadro Kanban Interativo:** adicionar, editar, excluir e visualizar tarefas, arrastar tarefas entre colunas como os post-its em papel;
-2.**Salvar as informações:** armazenar as tarefas e fluxos de trabalho para não serem perdidos ao atualizar a página;
-3.**Integração com IA:** sugestão de sprints e subtarefas para objetivos específicados;
+**Quadro Kanban Interativo:** adicionar, editar, excluir e visualizar tarefas, arrastar tarefas entre colunas como os post-its em papel;
+**Salvar as informações:** armazenar as tarefas e fluxos de trabalho para não serem perdidos ao atualizar a página;
+**Integração com IA:** sugestão de sprints e subtarefas para objetivos específicados;
 
 ## Tecnologias Utilizadas
 **Front-end:** HTML5, CSS, JavaScript;
