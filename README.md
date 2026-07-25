@@ -12,6 +12,7 @@ O projeto visa criar um gerenciador de tarefas no estilo kanban incorporando uma
 * **Integração com AI:** Gemini AI;
 
 **Status**: atualmente, o projeto está em desenvolvimento.
+
 O que já funciona:
 * Quadro interativo
 * Armazenamento local
