@@ -10,3 +10,14 @@ O projeto visa criar um gerenciador de tarefas no estilo Kanban incorporando uma
 **Front-end:** HTML5, CSS, JavaScript;
 **Armazenamento:** Local, webStorage API / DB ainda não implementado;
 **Integração com IA:** ainda não implementada;
+
+## Status
+Atualmente, o projeto está na fase de desenvolvimento  
+
+O que já funciona:
+* Quadro interativo
+* Armazenamento local
+
+O que falta implementar:
+* Back-end
+* Integração com a IA
