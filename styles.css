@@ -158,27 +158,39 @@ header {
 .janela-editar-coluna::backdrop {
   background-color: #00000080;
 }
-/*botões da janela de edição*/
-.excluir, .cancelar, .salvar {
+
+/*botão em (x) de cancelar janela*/
+.cancelar {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+/*botões na janela de edição de fluxo de trabalho*/
+.excluir, .salvar {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
   margin-right: 10px;
 }
-/*botão em (ícone de lápis) de editar ou excluir a coluna*/
+
+/*botão em (ícone de lápis) para editar ou excluir um fluxo de trabalho*/
 .editarColuna {
   cursor: pointer;
   border: none;
   background: transparent;
 }
+
 /*botão em (x) de excluir tarefa*/
 .excluirTarefa {
   cursor: pointer;
   border: none;
   background: transparent;
   color: var(--tag-vermelho);
-  display: flex;
   position: absolute;
   right: 5px;
   top: 5px;

@@ -76,7 +76,7 @@
 			</div>
 		</div>
 
-		<dialog id="janela-editar-coluna"><!--caixa de diálogo personalizada para editar coluna-->
+		<dialog id="janela-editar-coluna"> <!--caixa de diálogo personalizada para editar coluna-->
 			<span>Fluxo de Trabalho</span>
 			<div>
 				<label for="input">Título</label>
@@ -85,13 +85,14 @@
 
 			<div>
 				<button type="button" class="excluir" onclick="excluirColuna(this)">excluir</button>
-				<button type="button" class="cancelar" onclick="cancelar()">cancelar</button>
+				<button type="button" class="cancelar" onclick="cancelar()"><i class="material-icons">close</i></button>
 				<button type="button" class="salvar" onclick="salvarColuna(this)">salvar</button>
 			</div>
 		</dialog>
 		
 		<dialog id="janela-inserir-texto">
-			
+			<input type="text"></input>
+			<button></button>
 		</dialog>
 		<script type="text/javascript" src="script.js"></script>
 	</body>
