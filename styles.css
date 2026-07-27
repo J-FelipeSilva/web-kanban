@@ -10,37 +10,50 @@
   --tag-amarelo: #f2d600;
 }
 
-/*garante que o padding e a borda sejam incluídos no tamanho de todos os elementos*/
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0; /*remove a margem padrão do navegador para todos os elementos*/
   padding: 0;
 }
 
 body {
   font-family: Aptos, Tahoma, Helvetia, Arial, sans-serif;
   background-color: var(--body);
-  color: #172b4d;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 header {
   background-color: var(--header);
   padding: 15px 20px;
-  color: #ffffffd9;
   font-size: 1.5rem;
   font-weight: bold;
+  color: #ffffffd9;
   display: flex;
-  align-items: center;
-  gap: 15px;
+  justify-content: center;
 }
 
-/*container principal, quadro de tarefas*/
+/*conteiner principal*/
+.layout-principal {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+/*container onde ficará o botão de criar fluxo de trabalho e interação com AI*/
+.menu-vertical {
+	background-color: var(--body);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 300px;/*define uma largura para o menu-vertical no layout*/
+}
+
+/*quadro Kanban*/
 .quadro {
   display: flex; /*permite que o quadro seja dividido*/
-  flex: 1 1 0; /*os itens são dimensionados proporcionalmente, ignorando a largura original*/
+  flex-grow: 1; /*preenche o espaço que sobra no layout*/
   padding: 20px;
   gap: 20px; /*cria os espaços entre as colunas*/
   overflow-x: auto; /*permite scroll horizontal se houver muitas colunas*/
@@ -54,12 +67,11 @@ header {
   max-width: 300px;
   display: flex;
   flex-direction: column;
-  max-height: 100%;
 }
 
-/*div para poder colocar um contador ao lado do nome da etapa no Kanban*/
+/*div para poder colocar um contador ao lado do título no fluxo de trabalho no Kanban*/
 .header {
-  padding: 12px 15px;
+  padding: 10px 15px;
   font-weight: 600;
   font-size: 1rem;
   display: flex;
@@ -70,8 +82,8 @@ header {
 /*span para armazenar a informação de quantidade de post-its na coluna*/
 .contador {
   background-color: #dfe1e6;
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 5px 10px;
+  border-radius: 16px;
   font-size: 0.8rem;
   color: #5e6c84;
 }
@@ -88,8 +100,7 @@ header {
 /*post-it em si*/
 .post {
   background-color: var(--post-it);
-  border-radius: 6px;
-  padding: 12px;
+  padding: 10px;
   box-shadow: 0 1px 2px #091e4240;
   cursor: pointer;
   transition: background-color 0.2s, box-shadow 0.2s;
@@ -107,7 +118,7 @@ header {
 .add-post-it {
   margin: 0 10px 10px 10px;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   color: #5e6c84;
   cursor: pointer;
   text-decoration: none;
@@ -121,17 +132,14 @@ header {
 
 /*botão de adicionar fluxo de trabalho*/
 .add-coluna {
-  width: 300px;
-  padding: 10px 10px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  background-color: var(--coluna);
+  width: 280px;
+  margin: 0 10px 10px 10px;
+  padding: 10px;
+  border-radius: 8px;
   color: #5e6c84;
   cursor: pointer;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   transition: background-color 0.2s;
 }
 .add-coluna:hover {
@@ -153,18 +161,18 @@ header {
 /*botões da janela de edição*/
 .excluir, .cancelar, .salvar {
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   border: none;
   margin-right: 10px;
 }
-
+/*botão em (ícone de lápis) de editar ou excluir a coluna*/
 .editarColuna {
   cursor: pointer;
   border: none;
   background: transparent;
 }
-
+/*botão em (x) de excluir tarefa*/
 .excluirTarefa {
   cursor: pointer;
   border: none;
@@ -172,6 +180,6 @@ header {
   color: var(--tag-vermelho);
   display: flex;
   position: absolute;
-  right: 10px;
-  top: 12px;
+  right: 5px;
+  top: 5px;
 }

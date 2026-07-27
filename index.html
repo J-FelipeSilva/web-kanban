@@ -10,59 +10,69 @@
 
 	<body>
 		<header>
-			<button type="button" class="add-coluna" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
-			<p>Kanban</p>
+			<span>Quadro Kanban</span>
 		</header>
-
-		<div id="quadro" class="quadro"> <!--é o container principal que contém todas as colunas do quadro Kanban-->
-			<div id="coluna-1" class="coluna"> <!--é o container de cada coluna individual do quadro Kanban-->
-				<div class="header">
-					<span>A Fazer</span>
-					<span class="contador"></span>
-					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
-				</div>
-
-				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-					<div id="tarefa-3" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-						<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
-						<span>webStorageAPI</span>
-					</div>
-				</div>
-				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+		
+		<div class="layout-principal"> <!--é o container principal que contém todas as colunas do quadro Kanban-->
+			<div id ="menu-vertical" class="menu-vertical">
+				<button type="button" class="add-coluna" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
 			</div>
-
-			<div id="coluna-2" class="coluna">
-				<div class="header">
-					<span>Em Andamento</span>
-					<span class="contador"></span>
-					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
-				</div>
-
-				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-					<div id="tarefa-1" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-						<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
-						<span>HTML & CSS</span>
+			
+			<div id="quadro" class="quadro"> <!--é o container de cada coluna individual do quadro Kanban-->
+				<div id="coluna-1" class="coluna">
+					<div class="header">
+						<span>A Fazer</span>
+						<span class="contador"></span>
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 					</div>
 
-					<div id="tarefa-2" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-						<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
-						<span>javaScript</span>
+					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+						<!--as tarefas ficarão aqui-->
+						<div id="tarefa-4" class="post" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+							<span>Integração com DB e AI</span>
+						</div>
 					</div>
-				</div>
-				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
-			</div>
-
-			<div id="coluna-3" class="coluna">
-				<div class="header">
-					<span>Concluído</span>
-					<span class="contador"></span>
-					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
-				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-					<!--as tarefas ficarão aqui-->
+				<div id="coluna-2" class="coluna">
+					<div class="header">
+						<span>Em Andamento</span>
+						<span class="contador"></span>
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+					</div>
+
+					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+						<!--as tarefas ficarão aqui-->
+						<div id="tarefa-1" class="post" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+							<span>HTML & CSS</span>
+						</div>
+						<div id="tarefa-2" class="post" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+							<span>javaScript</span>
+						</div>
+					</div>
+					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
-				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+
+				<div id="coluna-3" class="coluna">
+					<div class="header">
+						<span>Concluído</span>
+						<span class="contador"></span>
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+					</div>
+
+					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+						<!--as tarefas ficarão aqui-->
+						<div id="tarefa-3" class="post" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+							<span>webStorageAPI</span>
+						</div>
+					</div>
+					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+				</div>
 			</div>
 		</div>
 
@@ -78,6 +88,10 @@
 				<button type="button" class="cancelar" onclick="cancelar()">cancelar</button>
 				<button type="button" class="salvar" onclick="salvarColuna(this)">salvar</button>
 			</div>
+		</dialog>
+		
+		<dialog id="janela-inserir-texto">
+			
 		</dialog>
 		<script type="text/javascript" src="script.js"></script>
 	</body>

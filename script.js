@@ -41,23 +41,29 @@ function criarTarefa(buttonElement) {
 		return;
 	}
 	
-	//cria os elementos necessários no DOM
+	//cria a caixa do novo post
 	const newDiv = document.createElement("div");
-	const newSpan = document.createElement("span");
-	const newButton = document.createElement("button");
-	newDiv.id = "tarefa-" + Date.now();
+	newDiv.id = "tarefa-" + Date.now(); //cria um id único para cada nova tarefa
 	newDiv.className = "post";
 	newDiv.setAttribute("draggable", "true");
 	newDiv.setAttribute("ondragstart", "dragstartHandler(event)");
+	
+	//cria o local onde ficará o texto da terfa
+	const newSpan = document.createElement("span");
+	newSpan.innerText = texto;
+	
+	//cria o botão de excluir tarefa
+	const newButton = document.createElement("button");
 	newButton.setAttribute("type", "button");
 	newButton.className = "excluirTarefa";
 	newButton.setAttribute("onclick", "excluirTarefa(this)");
 	newButton.innerHTML = "<i class=\"material-icons\">close</i>";
-	newSpan.innerText = texto;
-	newDiv.appendChild(newButton);
+	
+	//adiciona os elementos na caixa do novo post
 	newDiv.appendChild(newSpan);
-
-	//adiciona na coluna
+	newDiv.appendChild(newButton);
+	
+	//adiciona o post na coluna
 	const coluna = buttonElement.closest(".coluna");
 	if (coluna) {
 		const colunaCerta = coluna.querySelector(".post-its");
@@ -77,30 +83,25 @@ function criarFluxoDeTrabalho() {
 	//cria uma nova coluna
 	const quadro = document.getElementById("quadro");
 	const newColuna = document.createElement("div");
-	newColuna.id = "coluna-" + Date.now();
+	newColuna.id = "coluna-" + Date.now(); //cria um id único para cada nova coluna
 	newColuna.className = "coluna";
-	quadro.appendChild(newColuna);
 	
 	//cria a caixa do título na coluna nova
 	const newHeader = document.createElement("div");
 	newHeader.className = "header";
 	const newSpan = document.createElement("span");
 	newSpan.innerText = (texto);
-	newHeader.appendChild(newSpan);
-	newColuna.appendChild(newHeader);
 	
 	//cria o contador de tarefas na coluna nova
 	const newSpanContador = document.createElement("span");
 	newSpanContador.className = "contador";
 	newSpanContador.innerText = "0";
-	newHeader.appendChild(newSpanContador);
 
 	//cria a caixa onde ficarão os post-its
 	const newDiv = document.createElement("div");
 	newDiv.className = "post-its";
 	newDiv.setAttribute("ondrop", "dropHandler(event)");
 	newDiv.setAttribute("ondragover", "dragoverHandler(event)");
-	newColuna.appendChild(newDiv);
 	
 	//cria o botão de criar tarefa
 	const newButton = document.createElement("button");
@@ -108,7 +109,6 @@ function criarFluxoDeTrabalho() {
 	newButton.className = "add-post-it";
 	newButton.setAttribute("onclick", "criarTarefa(this)");
 	newButton.innerText = "+ Adicionar Tarefa";
-	newColuna.appendChild(newButton);
 	
 	//cria o botão de editar a coluna
 	const newButtonEditor = document.createElement("button");
@@ -116,21 +116,32 @@ function criarFluxoDeTrabalho() {
 	newButtonEditor.className = "editarColuna";
 	newButtonEditor.setAttribute("onclick", "editarColuna(this)");
 	newButtonEditor.innerHTML = "<i class=\"material-icons\">edit</i>";
+	
+	//adiciona a nova coluna e seus elementos no quadro 
+	quadro.appendChild(newColuna);
+	newColuna.appendChild(newHeader);
+	newHeader.appendChild(newSpan);
+	newHeader.appendChild(newSpanContador);
 	newHeader.appendChild(newButtonEditor);
+	newColuna.appendChild(newDiv);
+	newColuna.appendChild(newButton);
 	
 	salvarDados();
 }
 
 function editarColuna(buttonElement) {
-	//utiliza variáveis globais não constantes para armazenar informações fora da função
+	//utiliza variáveis para armazenar informações fora da função
 	colunaApontada = buttonElement.closest(".coluna");
 	spanApontado = colunaApontada.querySelector(".header span:first-child");
+	
 	const display = document.getElementById("janela-editar-coluna");
 	const input = document.getElementById("input");
 	input.value = spanApontado.innerText;
-	//executa o display que foi construido no html
+	//executa o display que foi construido no HTML
 	display.showModal();
 }
+
+//funções do display de editar coluna
 function salvarColuna() {
 	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
@@ -154,11 +165,6 @@ function excluirTarefa(buttonElement) {
 	//atualiza o contador da coluna
 	contador(coluna);
 	salvarDados();
-}
-
-function varrer() {
-	const varrerQuadro = document.querySelectorAll(".coluna");
-	varrerQuadro.forEach(contador);
 }
 
 function salvarDados() {
@@ -193,7 +199,7 @@ function salvarDados() {
 }
 
 function carregarDados() {
-	//se não houver dados salvos, inicia a página na configuração escrita no html
+	//se não houver dados salvos, inicia a página na configuração escrita no HTML
 	const dadosSalvos = localStorage.getItem("meuKanban");
 	if (!dadosSalvos) {
 		varrer();
@@ -238,5 +244,11 @@ function carregarDados() {
 	}
 	dadosKanban.forEach(dadosColuna);
 	console.log("informações recuperadas com sucesso:", dadosKanban);
+}
+
+//função para passar pelas colunas atualizando a quantidade de tarefas mostrada no contador
+function varrer() {
+	const varrerQuadro = document.querySelectorAll(".coluna");
+	varrerQuadro.forEach(contador);
 }
 document.addEventListener("DOMContentLoaded", carregarDados);
