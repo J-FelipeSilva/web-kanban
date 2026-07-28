@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8"> <!--garante que o navegador interprete corretamente os caracteres especiais do documento-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--garante que o layout seja responsivo-->
-		<title>Kanban Web</title>
+		<title>Web Kanban</title>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	</head>
@@ -13,17 +13,17 @@
 			<span>Quadro Kanban</span>
 		</header>
 		
-		<div class="layout-principal"> <!--é o container principal que contém todas as colunas do quadro Kanban-->
+		<div class="layout-principal"> <!--é o container principal-->
 			<div id ="menu-vertical" class="menu-vertical">
 				<button type="button" class="add-coluna" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
 			</div>
 			
 			<div id="quadro" class="quadro"> <!--é o container de cada coluna individual do quadro Kanban-->
-				<div id="coluna-1" class="coluna">
+				<div id="coluna-1" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
 					<div class="header">
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 						<span>A Fazer</span>
 						<span class="contador"></span>
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 					</div>
 
 					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
@@ -36,11 +36,11 @@
 					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
-				<div id="coluna-2" class="coluna">
+				<div id="coluna-2" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
 					<div class="header">
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 						<span>Em Andamento</span>
 						<span class="contador"></span>
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 					</div>
 
 					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
@@ -57,11 +57,11 @@
 					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
-				<div id="coluna-3" class="coluna">
+				<div id="coluna-3" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
 					<div class="header">
+						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 						<span>Concluído</span>
 						<span class="contador"></span>
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 					</div>
 
 					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
@@ -79,7 +79,7 @@
 		<dialog id="janela-editar-coluna"> <!--caixa de diálogo personalizada para editar coluna-->
 			<span>Fluxo de Trabalho</span>
 			<div>
-				<label for="input">Título</label>
+				<label for="input">Editar Título</label>
 				<input type="text" id="input"></input>
 			</div>
 
@@ -90,7 +90,7 @@
 			</div>
 		</dialog>
 		
-		<dialog id="janela-inserir-texto">
+		<dialog id="janela-inserir-texto"> <!--caixa de diálogo personalizada para receber os textos de terfas e fluxos de trabalho-->
 			<input type="text"></input>
 			<button></button>
 		</dialog>

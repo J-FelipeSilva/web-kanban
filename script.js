@@ -35,7 +35,6 @@ function dropHandler(event) {
 }
 
 function criarTarefa(buttonElement) {
-	//recebe o texto da tarefa
 	const texto = prompt("Descreva a tarefa");
 	if (texto===null || texto.trim()=="") {
 		return;
@@ -74,7 +73,6 @@ function criarTarefa(buttonElement) {
 }
 
 function criarFluxoDeTrabalho() {
-	//recebe o título da Etapa de Trabalho
 	const texto = prompt("Título");
 	if (texto===null || texto.trim()=="") {
 		return;
@@ -120,9 +118,9 @@ function criarFluxoDeTrabalho() {
 	//adiciona a nova coluna e seus elementos no quadro 
 	quadro.appendChild(newColuna);
 	newColuna.appendChild(newHeader);
+	newHeader.appendChild(newButtonEditor);
 	newHeader.appendChild(newSpan);
 	newHeader.appendChild(newSpanContador);
-	newHeader.appendChild(newButtonEditor);
 	newColuna.appendChild(newDiv);
 	newColuna.appendChild(newButton);
 	
@@ -132,7 +130,7 @@ function criarFluxoDeTrabalho() {
 function editarColuna(buttonElement) {
 	//utiliza variáveis para armazenar informações fora da função
 	colunaApontada = buttonElement.closest(".coluna");
-	spanApontado = colunaApontada.querySelector(".header span:first-child");
+	spanApontado = colunaApontada.querySelector(".header span");
 	
 	const display = document.getElementById("janela-editar-coluna");
 	const input = document.getElementById("input");
@@ -162,7 +160,7 @@ function excluirTarefa(buttonElement) {
 	const post = buttonElement.closest(".post");
 	const coluna = post.closest(".coluna");
 	post.remove();
-	//atualiza o contador da coluna
+	
 	contador(coluna);
 	salvarDados();
 }
@@ -174,11 +172,11 @@ function salvarDados() {
 	//função que vai guardar cada coluna individualmente
 	function processarTrabalho(coluna) {
 		const id = coluna.id;
-		const titulo = coluna.querySelector(".header span:first-child").innerText;
+		const titulo = coluna.querySelector(".header span").innerText;
 		const posts = coluna.querySelectorAll(".post");
 		const tarefas = [];
 		
-		//guarda que vai guardar todas os post individualmente
+		//função que vai guardar todas os post individualmente
 		function processarTarefa(post) {
 			tarefas.push({
 				id: post.id,
@@ -230,9 +228,9 @@ function carregarDados() {
 		const colunaHtml = `
 			<div id="${coluna.id}" class="coluna">
 				<div class="header">
+					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 					<span>${coluna.titulo}</span>
 					<span class="contador">${coluna.tarefas.length}</span>
-					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
 				</div>
 				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 					${tarefasHtml}

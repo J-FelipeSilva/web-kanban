@@ -60,6 +60,7 @@ header {
   align-items: flex-start; /*impede que as colunas estiquem até o final da tela*/
 }
 
+/*div onde ficará as tarefas e cabeçalho: título, contador, ícone de editar*/
 .coluna {
   background-color: var(--coluna);
   border-radius: 8px;
@@ -75,8 +76,15 @@ header {
   font-weight: 600;
   font-size: 1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+/*botão em ícone de lápis para editar ou excluir um fluxo de trabalho*/
+.editarColuna {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  margin-right: 5px;
 }
 
 /*span para armazenar a informação de quantidade de post-its na coluna*/
@@ -86,9 +94,10 @@ header {
   border-radius: 16px;
   font-size: 0.8rem;
   color: #5e6c84;
+  margin-left: auto;
 }
 
-/*área em que os post-its ficarão*/
+/*conteiner em que os post-its ficarão*/
 .post-its {
   padding: 0 10px 10px 10px;
   overflow-y: auto; /*scroll vertical se a coluna estiver cheia*/
@@ -159,16 +168,6 @@ header {
   background-color: #00000080;
 }
 
-/*botão em (x) de cancelar janela*/
-.cancelar {
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
-
 /*botões na janela de edição de fluxo de trabalho*/
 .excluir, .salvar {
   padding: 10px 20px;
@@ -178,11 +177,14 @@ header {
   margin-right: 10px;
 }
 
-/*botão em (ícone de lápis) para editar ou excluir um fluxo de trabalho*/
-.editarColuna {
+/*botão em (x) de cancelar janela*/
+.cancelar {
   cursor: pointer;
   border: none;
   background: transparent;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
 /*botão em (x) de excluir tarefa*/
