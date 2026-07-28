@@ -77,9 +77,9 @@
 		</div>
 
 		<dialog id="janela-editar-coluna"> <!--caixa de diálogo personalizada para editar coluna-->
-			<span>Fluxo de Trabalho</span>
+			<span>Editar Fluxo de Trabalho</span>
 			<div>
-				<label for="input">Editar Título</label>
+				<label for="input">Título</label>
 				<input type="text" id="input"></input>
 			</div>
 
@@ -90,9 +90,24 @@
 			</div>
 		</dialog>
 		
-		<dialog id="janela-inserir-texto"> <!--caixa de diálogo personalizada para receber os textos de terfas e fluxos de trabalho-->
-			<input type="text"></input>
-			<button></button>
+		<dialog id="janela-novo-fluxo-de-trabalho"> <!--caixa de diálogo personalizada para receber os textos de novos fluxos de trabalho-->
+			<div>
+				<label for="input">Novo Fluxo de Trabalho</label>
+				<input type="text" id="input-texto"></input>
+			</div>
+			<div>
+				<button>salvar</button>
+			</div>
+		</dialog>
+		
+		<dialog id="janela-nova-tarefa"> <!--caixa de diálogo personalizada para receber os textos de novas tarefas-->
+			<div>
+				<label for="input">Nova Tarefa</label>
+				<input type="text" id="input-texto"></input>
+			</div>
+			<div>
+				<button>salvar</button>
+			</div>
 		</dialog>
 		<script type="text/javascript" src="script.js"></script>
 	</body>
