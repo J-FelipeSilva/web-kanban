@@ -73,7 +73,7 @@ header {
 /*div para poder colocar um contador ao lado do título no fluxo de trabalho no Kanban*/
 .header {
   padding: 10px 15px;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -84,7 +84,10 @@ header {
   cursor: pointer;
   border: none;
   background: transparent;
-  margin-right: 5px;
+  margin-right: auto;
+}
+.editarColuna:hover {
+	color: #5e6c84;
 }
 
 /*span para armazenar a informação de quantidade de post-its na coluna*/
@@ -116,7 +119,7 @@ header {
   position: relative;
 }
 .post:hover {
-  background-color: #f4f5f7;
+  background-color: var(--coluna);
 }
 .post span {
   line-height: 1.4;
@@ -135,8 +138,20 @@ header {
   transition: background-color 0.2s;
 }
 .add-post-it:hover {
-  background-color: #091e4214;
-  color: #172b4d;
+  color: black;
+}
+/*botão em (x) de excluir tarefa*/
+.excluirTarefa {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--tag-vermelho);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.excluirTarefa:hover {
+	color: red;
 }
 
 /*botão de adicionar fluxo de trabalho*/
@@ -149,32 +164,79 @@ header {
   cursor: pointer;
   text-decoration: none;
   display: block;
+  background-color: var(--coluna);
   transition: background-color 0.2s;
 }
 .add-coluna:hover {
-  background-color: var(--coluna);
-  color: #172b4d;
+  color: black;
 }
 
 /*interface de edição de fluxo de trabalho*/
-.janela-editar-coluna {
-  border: none;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 10px #0000004d;
-  min-width: 300px;
+#janela-editar-fluxo-de-trabalho {
+	position: fixed;
+	top: 50%; /*muda a posição do ponto (0,0) da janela*/
+	left: 50%;
+	transform: translate(-50%, -50%); /*artifício para manter a janela no centro da tela*/
+	border: none;
+	border-radius: 8px;
+	width: 400px;
+	background-color: var(--coluna);
 }
-.janela-editar-coluna::backdrop {
-  background-color: #00000080;
+#janela-editar-fluxo-de-trabalho::backdrop {
+	background-color: #00000070;
 }
 
-/*botões na janela de edição de fluxo de trabalho*/
-.excluir, .salvar {
+.janela-header {
+	display: flex;
+	justify-content: center;
+	padding: 10px 15px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: var(--tag-azul);
+}
+.janela-body {
+	display: flex;
+	padding: 10px;
+	flex-direction: column;
+}
+
+.janela-footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 15px;
+}
+
+/*botão para excluir fluxo de trabalho*/
+.excluir {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
   margin-right: 10px;
+  color: #ffffffd9;
+  background-color: transparent;
+  color: var(--tag-vermelho);
+  transition: background-color 0.2s;
+}
+.excluir:hover {
+	background-color: var(--tag-vermelho);
+	color: white;
+}
+
+/*botão para salvar alterações no fluxo de trabalho*/
+.salvar {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-right: 10px;
+  background-color: transparent;
+  color: var(--tag-verde);
+  transition: background-color 0.2s;
+}
+.salvar:hover {
+	background-color: var(--tag-verde);
+	color: white;
 }
 
 /*botão em (x) de cancelar janela*/
@@ -182,17 +244,6 @@ header {
   cursor: pointer;
   border: none;
   background: transparent;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
-
-/*botão em (x) de excluir tarefa*/
-.excluirTarefa {
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: var(--tag-vermelho);
   position: absolute;
   right: 5px;
   top: 5px;

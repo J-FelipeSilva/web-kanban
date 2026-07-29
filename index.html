@@ -76,36 +76,45 @@
 			</div>
 		</div>
 
-		<dialog id="janela-editar-coluna"> <!--caixa de diálogo personalizada para editar coluna-->
-			<span>Editar Fluxo de Trabalho</span>
-			<div>
-				<label for="input">Título</label>
+		<dialog id="janela-editar-fluxo-de-trabalho"> <!--caixa de diálogo personalizada para editar coluna-->
+			<div class="janela-header">
+				<span>Editar Fluxo de Trabalho</span>
+				<button type="button" class="cancelar" onclick="cancelar()"><i class="material-icons">close</i></button>
+			</div>
+			<div class="janela-body">
+				<label for="input"></label>
 				<input type="text" id="input"></input>
 			</div>
-
-			<div>
+			<div class="janela-footer">
 				<button type="button" class="excluir" onclick="excluirColuna(this)">excluir</button>
-				<button type="button" class="cancelar" onclick="cancelar()"><i class="material-icons">close</i></button>
 				<button type="button" class="salvar" onclick="salvarColuna(this)">salvar</button>
 			</div>
 		</dialog>
 		
 		<dialog id="janela-novo-fluxo-de-trabalho"> <!--caixa de diálogo personalizada para receber os textos de novos fluxos de trabalho-->
-			<div>
-				<label for="input">Novo Fluxo de Trabalho</label>
-				<input type="text" id="input-texto-nfdt"></input>
+			<div class="janela-header">
+				<span>Novo Fluxo de Trabalho</span>
+				<button type="button" class="cancelar" onclick=""><i class="material-icons">close</i></button>
 			</div>
-			<div>
+			<div class="janela-body">
+				<label for="input"></label>
+				<input type="text" id=""></input>
+			</div>
+			<div class="janela-footer">
 				<button type="button" class="" onclick="">salvar</button>
 			</div>
 		</dialog>
 		
 		<dialog id="janela-nova-tarefa"> <!--caixa de diálogo personalizada para receber os textos de novas tarefas-->
-			<div>
-				<label for="input">Nova Tarefa</label>
-				<input type="text" id="input-texto-nt"></input>
+			<div class="janela-header">
+				<span>Nova Tarefa</span>
+				<button type="button" class="cancelar" onclick=""><i class="material-icons">close</i></button>
 			</div>
-			<div>
+			<div class="janela-body">
+				<label for="input"></label>
+				<input type="text" id=""></input>
+			</div>
+			<div class="janela-footer">
 				<button type="button" class="" onclick="">salvar</button>
 			</div>
 		</dialog>

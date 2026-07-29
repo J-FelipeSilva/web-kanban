@@ -132,7 +132,7 @@ function editarColuna(buttonElement) {
 	colunaApontada = buttonElement.closest(".coluna");
 	spanApontado = colunaApontada.querySelector(".header span");
 	
-	const display = document.getElementById("janela-editar-coluna");
+	const display = document.getElementById("janela-editar-fluxo-de-trabalho");
 	const input = document.getElementById("input");
 	input.value = spanApontado.innerText;
 	//executa o display que foi construido no HTML
@@ -143,17 +143,17 @@ function editarColuna(buttonElement) {
 function salvarColuna() {
 	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
-		document.getElementById("janela-editar-coluna").close();
+		document.getElementById("janela-editar-fluxo-de-trabalho").close();
 	}
 	salvarDados();
 }
 function excluirColuna() {
 	colunaApontada.remove();
-	document.getElementById("janela-editar-coluna").close();
+	document.getElementById("janela-editar-fluxo-de-trabalho").close();
 	salvarDados();
 }
 function cancelar() {
-	document.getElementById("janela-editar-coluna").close();
+	document.getElementById("janela-editar-fluxo-de-trabalho").close();
 }
 
 function excluirTarefa(buttonElement) {
