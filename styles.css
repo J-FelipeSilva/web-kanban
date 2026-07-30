@@ -118,7 +118,7 @@ header {
   position: relative;
 }
 .tarefa:hover {
-  background-color: var(--coluna);
+  background-color: #ebda7a;
 }
 .tarefa span {
   line-height: 1.4;
