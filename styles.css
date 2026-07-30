@@ -61,7 +61,7 @@ header {
 .fluxo-de-trabalho {
   background-color: var(--coluna);
   border-radius: 8px;
-  width: 300px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
 }
