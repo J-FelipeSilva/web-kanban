@@ -113,7 +113,7 @@ function criarFluxoDeTrabalho() {
 	newButtonEdit.setAttribute("type", "button");
 	newButtonEdit.className = "editar-fluxo-de-trabalho";
 	newButtonEdit.setAttribute("onclick", "editarFluxoDeTrabalho(this)");
-	newButtonEdit.innerHTML = "<i class=\"material-icons\">edit</i>";
+	newButtonEdit.innerHTML = "<i class=\"material-icons\">menu</i>";
 	
 	//adiciona o novo fluxo de trabalho e seus elementos no quadro
 	quadro.appendChild(newFluxoDeTrabalho);
@@ -228,7 +228,7 @@ function carregarDados() {
 		const colunaHtml = `
 			<div id="${coluna.id}" class="fluxo-de-trabalho">
 				<div class="header">
-					<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">edit</i></button>
+					<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">menu</i></button>
 					<span>${coluna.titulo}</span>
 					<span class="contador">${coluna.tarefas.length}</span>
 				</div>
