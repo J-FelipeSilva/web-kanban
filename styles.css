@@ -127,8 +127,9 @@ header {
 
 /*botão de adicionar tarefa*/
 .add-tarefa {
-  margin: 0 10px 10px 10px;
   padding: 10px;
+  margin: 10px auto;
+  width: 260px;
   border-radius: 8px;
   color: #5e6c84;
   cursor: pointer;
@@ -155,9 +156,8 @@ header {
 
 /*botão de adicionar fluxo de trabalho*/
 .add-fluxo-de-trabalho {
-  width: 280px;
-  margin: 0 10px 10px 10px;
   padding: 10px;
+  width: 260px;
   border-radius: 8px;
   color: #5e6c84;
   cursor: pointer;
