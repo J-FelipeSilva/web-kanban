@@ -84,9 +84,10 @@ header {
   border: none;
   background: transparent;
   margin-right: auto;
+  color: #5e6c84;
 }
 .editar-fluxo-de-trabalho:hover {
-	color: #5e6c84;
+	color: black;
 }
 
 /*span para exibir a quantidade de tarefas no fluxo atual*/
