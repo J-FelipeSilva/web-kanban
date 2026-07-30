@@ -2,11 +2,11 @@ let colunaApontada;
 let spanApontado;
 
 function contador(coluna) {
-	const divPostIts = coluna.querySelector(".post-its");
-	const qntTarefas = divPostIts.querySelectorAll(".post").length;
+	const divCaixa = coluna.querySelector(".caixa-de-tarefas");
+	const quantidadeDeTarefas = divCaixa.querySelectorAll(".tarefa").length;
 	const spanContador = coluna.querySelector(".contador");
 	if (spanContador) {
-		spanContador.innerText = qntTarefas;
+		spanContador.innerText = quantidadeDeTarefas;
 	}
 }
 
@@ -20,12 +20,12 @@ function dragoverHandler(event) {
 function dropHandler(event) {
 	event.preventDefault();
 	const info = event.dataTransfer.getData("text");
-	const localCerto = event.target.closest(".post-its");
+	const localCerto = event.target.closest(".caixa-de-tarefas");
 	if (localCerto) {
 		const tarefa = document.getElementById(info);
-		const colunaInicial = tarefa.closest(".coluna");
+		const colunaInicial = tarefa.closest(".fluxo-de-trabalho");
 		localCerto.appendChild(document.getElementById(info));
-		const colunaFinal = localCerto.closest(".coluna");
+		const colunaFinal = localCerto.closest(".fluxo-de-trabalho");
 		if(colunaFinal !== colunaInicial) {
 			contador(colunaInicial);
 			contador(colunaFinal);
@@ -40,12 +40,12 @@ function criarTarefa(buttonElement) {
 		return;
 	}
 	
-	//cria a caixa do novo post
-	const newDiv = document.createElement("div");
-	newDiv.id = "tarefa-" + Date.now(); //cria um id único para cada nova tarefa
-	newDiv.className = "post";
-	newDiv.setAttribute("draggable", "true");
-	newDiv.setAttribute("ondragstart", "dragstartHandler(event)");
+	//cria a nova tarefa
+	const newTarefa = document.createElement("div");
+	newTarefa.id = "tarefa-" + Date.now(); //cria um id único para cada nova tarefa
+	newTarefa.className = "tarefa";
+	newTarefa.setAttribute("draggable", "true");
+	newTarefa.setAttribute("ondragstart", "dragstartHandler(event)");
 	
 	//cria o local onde ficará o texto da terfa
 	const newSpan = document.createElement("span");
@@ -54,20 +54,20 @@ function criarTarefa(buttonElement) {
 	//cria o botão de excluir tarefa
 	const newButton = document.createElement("button");
 	newButton.setAttribute("type", "button");
-	newButton.className = "excluirTarefa";
+	newButton.className = "excluir-tarefa";
 	newButton.setAttribute("onclick", "excluirTarefa(this)");
 	newButton.innerHTML = "<i class=\"material-icons\">close</i>";
 	
-	//adiciona os elementos na caixa do novo post
-	newDiv.appendChild(newSpan);
-	newDiv.appendChild(newButton);
+	//adiciona os elementos na caixa de tarefas
+	newTarefa.appendChild(newSpan);
+	newTarefa.appendChild(newButton);
 	
-	//adiciona o post na coluna
-	const coluna = buttonElement.closest(".coluna");
+	//adiciona a tarefa no fluxo de trabalho dentro da caixa de tarefas
+	const coluna = buttonElement.closest(".fluxo-de-trabalho");
 	if (coluna) {
-		const colunaCerta = coluna.querySelector(".post-its");
-		colunaCerta.appendChild(newDiv);
-		contador(coluna); //atualiza o contador da coluna
+		const colunaCerta = coluna.querySelector(".caixa-de-tarefas");
+		colunaCerta.appendChild(newTarefa);
+		contador(coluna); //atualiza o contador no fluxo de trabalho
 	}
 	salvarDados();
 }
@@ -78,76 +78,76 @@ function criarFluxoDeTrabalho() {
 		return;
 	}
 	
-	//cria uma nova coluna
+	//cria uma nova coluna no quadro
 	const quadro = document.getElementById("quadro");
-	const newColuna = document.createElement("div");
-	newColuna.id = "coluna-" + Date.now(); //cria um id único para cada nova coluna
-	newColuna.className = "coluna";
+	const newFluxoDeTrabalho = document.createElement("div");
+	newFluxoDeTrabalho.id = "coluna-" + Date.now(); //cria um id único para cada novo fluxo de trabalho
+	newFluxoDeTrabalho.className = "fluxo-de-trabalho";
 	
-	//cria a caixa do título na coluna nova
+	//cria o cabeçalho do contador e título na nova coluna
 	const newHeader = document.createElement("div");
 	newHeader.className = "header";
 	const newSpan = document.createElement("span");
 	newSpan.innerText = (texto);
 	
-	//cria o contador de tarefas na coluna nova
+	//cria o novo contador
 	const newSpanContador = document.createElement("span");
 	newSpanContador.className = "contador";
 	newSpanContador.innerText = "0";
 
-	//cria a caixa onde ficarão os post-its
-	const newDiv = document.createElement("div");
-	newDiv.className = "post-its";
-	newDiv.setAttribute("ondrop", "dropHandler(event)");
-	newDiv.setAttribute("ondragover", "dragoverHandler(event)");
+	//cria a nova caixa de tarefas
+	const newCaixaDeTarefas = document.createElement("div");
+	newCaixaDeTarefas.className = "caixa-de-tarefas";
+	newCaixaDeTarefas.setAttribute("ondrop", "dropHandler(event)");
+	newCaixaDeTarefas.setAttribute("ondragover", "dragoverHandler(event)");
 	
 	//cria o botão de criar tarefa
 	const newButton = document.createElement("button");
 	newButton.setAttribute("type", "button");
-	newButton.className = "add-post-it";
+	newButton.className = "add-tarefa";
 	newButton.setAttribute("onclick", "criarTarefa(this)");
 	newButton.innerText = "+ Adicionar Tarefa";
 	
-	//cria o botão de editar a coluna
-	const newButtonEditor = document.createElement("button");
-	newButtonEditor.setAttribute("type", "button");
-	newButtonEditor.className = "editarColuna";
-	newButtonEditor.setAttribute("onclick", "editarColuna(this)");
-	newButtonEditor.innerHTML = "<i class=\"material-icons\">edit</i>";
+	//cria o botão de editar o fluxo de trabalho
+	const newButtonEdit = document.createElement("button");
+	newButtonEdit.setAttribute("type", "button");
+	newButtonEdit.className = "editar-fluxo-de-trabalho";
+	newButtonEdit.setAttribute("onclick", "editarFluxoDeTrabalho(this)");
+	newButtonEdit.innerHTML = "<i class=\"material-icons\">edit</i>";
 	
-	//adiciona a nova coluna e seus elementos no quadro 
-	quadro.appendChild(newColuna);
-	newColuna.appendChild(newHeader);
-	newHeader.appendChild(newButtonEditor);
+	//adiciona o novo fluxo de trabalho e seus elementos no quadro
+	quadro.appendChild(newFluxoDeTrabalho);
+	newFluxoDeTrabalho.appendChild(newHeader);
+	newHeader.appendChild(newButtonEdit);
 	newHeader.appendChild(newSpan);
 	newHeader.appendChild(newSpanContador);
-	newColuna.appendChild(newDiv);
-	newColuna.appendChild(newButton);
+	newFluxoDeTrabalho.appendChild(newCaixaDeTarefas);
+	newFluxoDeTrabalho.appendChild(newButton);
 	
 	salvarDados();
 }
 
-function editarColuna(buttonElement) {
+function editarFluxoDeTrabalho(buttonElement) {
 	//utiliza variáveis para armazenar informações fora da função
-	colunaApontada = buttonElement.closest(".coluna");
+	colunaApontada = buttonElement.closest(".fluxo-de-trabalho");
 	spanApontado = colunaApontada.querySelector(".header span");
 	
 	const display = document.getElementById("janela-editar-fluxo-de-trabalho");
 	const input = document.getElementById("input");
 	input.value = spanApontado.innerText;
-	//executa o display que foi construido no HTML
+	
 	display.showModal();
 }
 
-//funções do display de editar coluna
-function salvarColuna() {
+//funções do Modal
+function salvarFluxoDeTrabalho() {
 	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
 		document.getElementById("janela-editar-fluxo-de-trabalho").close();
 	}
 	salvarDados();
 }
-function excluirColuna() {
+function excluirFluxoDeTrabalho() {
 	colunaApontada.remove();
 	document.getElementById("janela-editar-fluxo-de-trabalho").close();
 	salvarDados();
@@ -157,8 +157,8 @@ function cancelar() {
 }
 
 function excluirTarefa(buttonElement) {
-	const post = buttonElement.closest(".post");
-	const coluna = post.closest(".coluna");
+	const post = buttonElement.closest(".tarefa");
+	const coluna = post.closest(".fluxo-de-trabalho");
 	post.remove();
 	
 	contador(coluna);
@@ -166,14 +166,14 @@ function excluirTarefa(buttonElement) {
 }
 
 function salvarDados() {
-	const colunas = document.querySelectorAll(".coluna");
+	const colunas = document.querySelectorAll(".fluxo-de-trabalho");
 	const dadosKanban = [];
 	
 	//função que vai guardar cada coluna individualmente
 	function processarTrabalho(coluna) {
 		const id = coluna.id;
 		const titulo = coluna.querySelector(".header span").innerText;
-		const posts = coluna.querySelectorAll(".post");
+		const posts = coluna.querySelectorAll(".tarefa");
 		const tarefas = [];
 		
 		//função que vai guardar todas os post individualmente
@@ -200,7 +200,7 @@ function carregarDados() {
 	//se não houver dados salvos, inicia a página na configuração escrita no HTML
 	const dadosSalvos = localStorage.getItem("meuKanban");
 	if (!dadosSalvos) {
-		varrer();
+		atualizarContagem();
 		return;
 	}
 	
@@ -215,8 +215,8 @@ function carregarDados() {
 		function dadosTarefa(post) {
 			//o sinal de crase serve pra poder quebrar linhas e inserir informações ${}
 			tarefasHtml += `
-				<div id="${post.id}" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-					<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+				<div id="${post.id}" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+					<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
 					<span>${post.texto}</span>
 				</div>
 			`;
@@ -226,16 +226,16 @@ function carregarDados() {
 		let tarefasHtml = "";
 		coluna.tarefas.forEach(dadosTarefa);
 		const colunaHtml = `
-			<div id="${coluna.id}" class="coluna">
+			<div id="${coluna.id}" class="fluxo-de-trabalho">
 				<div class="header">
-					<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+					<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">edit</i></button>
 					<span>${coluna.titulo}</span>
 					<span class="contador">${coluna.tarefas.length}</span>
 				</div>
-				<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+				<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 					${tarefasHtml}
 				</div>
-				<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+				<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 			</div>
 		`;
 		quadro.insertAdjacentHTML("beforeend", colunaHtml);
@@ -245,8 +245,8 @@ function carregarDados() {
 }
 
 //função para passar pelas colunas atualizando a quantidade de tarefas mostrada no contador
-function varrer() {
-	const varrerQuadro = document.querySelectorAll(".coluna");
-	varrerQuadro.forEach(contador);
+function atualizarContagem() {
+	const contagem = document.querySelectorAll(".fluxo-de-trabalho");
+	contagem.forEach(contador);
 }
 document.addEventListener("DOMContentLoaded", carregarDados);

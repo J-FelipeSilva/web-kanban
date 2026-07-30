@@ -13,7 +13,7 @@
 * {
   box-sizing: border-box;
   margin: 0; /*remove a margem padrão do navegador para todos os elementos*/
-  padding: 0;
+  padding: 0; /*remove o padding padrão do navegador para todos os elementos*/
 }
 
 body {
@@ -34,7 +34,7 @@ header {
   justify-content: center;
 }
 
-/*conteiner principal*/
+/*container principal*/
 .layout-principal {
 	display: flex;
 	flex-direction: row;
@@ -47,7 +47,7 @@ header {
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
-	width: 300px;/*define uma largura para o menu-vertical no layout*/
+	width: 300px;
 }
 
 /*quadro Kanban*/
@@ -55,13 +55,12 @@ header {
   display: flex; /*permite que o quadro seja dividido*/
   flex-grow: 1; /*preenche o espaço que sobra no layout*/
   padding: 20px;
-  gap: 20px; /*cria os espaços entre as colunas*/
+  gap: 20px; /*cria os espaços entre as colunas de fluxo de trabalho*/
   overflow-x: auto; /*permite scroll horizontal se houver muitas colunas*/
   align-items: flex-start; /*impede que as colunas estiquem até o final da tela*/
 }
 
-/*div onde ficará as tarefas e cabeçalho: título, contador, ícone de editar*/
-.coluna {
+.fluxo-de-trabalho {
   background-color: var(--coluna);
   border-radius: 8px;
   min-width: 300px;
@@ -70,7 +69,7 @@ header {
   flex-direction: column;
 }
 
-/*div para poder colocar um contador ao lado do título no fluxo de trabalho no Kanban*/
+/*cabeçalho onde fica o contador e o título do fluxo de trabalho*/
 .header {
   padding: 10px 15px;
   font-weight: bold;
@@ -79,18 +78,18 @@ header {
   align-items: center;
 }
 
-/*botão em ícone de lápis para editar ou excluir um fluxo de trabalho*/
-.editarColuna {
+/*botão em ícone (lápis) para editar ou excluir um fluxo de trabalho*/
+.editar-fluxo-de-trabalho {
   cursor: pointer;
   border: none;
   background: transparent;
   margin-right: auto;
 }
-.editarColuna:hover {
+.editar-fluxo-de-trabalho:hover {
 	color: #5e6c84;
 }
 
-/*span para armazenar a informação de quantidade de post-its na coluna*/
+/*span para exibir a quantidade de tarefas no fluxo atual*/
 .contador {
   background-color: #dfe1e6;
   padding: 5px 10px;
@@ -100,8 +99,8 @@ header {
   margin-left: auto;
 }
 
-/*conteiner em que os post-its ficarão*/
-.post-its {
+/*container em que as tarefas ficarão*/
+.caixa-de-tarefas {
   padding: 0 10px 10px 10px;
   overflow-y: auto; /*scroll vertical se a coluna estiver cheia*/
   display: flex;
@@ -110,7 +109,7 @@ header {
 }
 
 /*post-it em si*/
-.post {
+.tarefa {
   background-color: var(--post-it);
   padding: 10px;
   box-shadow: 0 1px 2px #091e4240;
@@ -118,16 +117,16 @@ header {
   transition: background-color 0.2s, box-shadow 0.2s;
   position: relative;
 }
-.post:hover {
+.tarefa:hover {
   background-color: var(--coluna);
 }
-.post span {
+.tarefa span {
   line-height: 1.4;
   word-break: break-word; /*quebra a palavra se ela for maior que o post-it*/
 }
 
 /*botão de adicionar tarefa*/
-.add-post-it {
+.add-tarefa {
   margin: 0 10px 10px 10px;
   padding: 10px;
   border-radius: 8px;
@@ -137,11 +136,11 @@ header {
   display: block;
   transition: background-color 0.2s;
 }
-.add-post-it:hover {
+.add-tarefa:hover {
   color: black;
 }
 /*botão em (x) de excluir tarefa*/
-.excluirTarefa {
+.excluir-tarefa {
   cursor: pointer;
   border: none;
   background: transparent;
@@ -150,12 +149,12 @@ header {
   right: 5px;
   top: 5px;
 }
-.excluirTarefa:hover {
+.excluir-tarefa:hover {
 	color: red;
 }
 
 /*botão de adicionar fluxo de trabalho*/
-.add-coluna {
+.add-fluxo-de-trabalho {
   width: 280px;
   margin: 0 10px 10px 10px;
   padding: 10px;
@@ -167,15 +166,15 @@ header {
   background-color: var(--coluna);
   transition: background-color 0.2s;
 }
-.add-coluna:hover {
+.add-fluxo-de-trabalho:hover {
   color: black;
 }
 
 /*interface de edição de fluxo de trabalho*/
 #janela-editar-fluxo-de-trabalho {
 	position: fixed;
-	top: 50%; /*muda a posição do ponto (0,0) da janela*/
-	left: 50%;
+	top: 50%; /*muda a posição do ponto (0,0) da janela em relação ao eixo vertical*/
+	left: 50%; /*muda a posição do ponto (0,0) da janela em relação ao eixo hotizontal*/
 	transform: translate(-50%, -50%); /*artifício para manter a janela no centro da tela*/
 	border: none;
 	border-radius: 8px;
@@ -207,7 +206,7 @@ header {
 }
 
 /*botão para excluir fluxo de trabalho*/
-.excluir {
+.excluir-fluxo-de-trabalho {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -218,13 +217,13 @@ header {
   color: var(--tag-vermelho);
   transition: background-color 0.2s;
 }
-.excluir:hover {
+.excluir-fluxo-de-trabalho:hover {
 	background-color: var(--tag-vermelho);
 	color: white;
 }
 
 /*botão para salvar alterações no fluxo de trabalho*/
-.salvar {
+.salvar-fluxo-de-trabalho {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -234,7 +233,7 @@ header {
   color: var(--tag-verde);
   transition: background-color 0.2s;
 }
-.salvar:hover {
+.salvar-fluxo-de-trabalho:hover {
 	background-color: var(--tag-verde);
 	color: white;
 }
@@ -243,8 +242,12 @@ header {
 .cancelar {
   cursor: pointer;
   border: none;
+  color: #5e6c84;
   background: transparent;
   position: absolute;
   right: 5px;
   top: 5px;
+}
+.cancelar:hover {
+	color: black;
 }

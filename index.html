@@ -14,69 +14,69 @@
 		</header>
 		
 		<div class="layout-principal"> <!--é o container principal-->
-			<div id ="menu-vertical" class="menu-vertical">
-				<button type="button" class="add-coluna" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
+			<div id ="menu-vertical" class="menu-vertical"> <!--é o container onde ficará a integração com AI, separar os sprints no futuro-->
+				<button type="button" class="add-fluxo-de-trabalho" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
 			</div>
 			
-			<div id="quadro" class="quadro"> <!--é o container de cada coluna individual do quadro Kanban-->
-				<div id="coluna-1" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
+			<div id="quadro" class="quadro"> <!--é o container de cada fluxo de trabalho no quadro Kanban-->
+				<div id="coluna-1" class="fluxo-de-trabalho">
 					<div class="header">
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+						<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">edit</i></button>
 						<span>A Fazer</span>
 						<span class="contador"></span>
 					</div>
 
-					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-						<!--as tarefas ficarão aqui-->
-						<div id="tarefa-4" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+						<!--as tarefas ficam aqui-->
+						<div id="tarefa-4" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
 							<span>Integração com DB e AI</span>
 						</div>
 					</div>
-					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
-				<div id="coluna-2" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
+				<div id="coluna-2" class="fluxo-de-trabalho">
 					<div class="header">
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+						<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">edit</i></button>
 						<span>Em Andamento</span>
 						<span class="contador"></span>
 					</div>
 
-					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-						<!--as tarefas ficarão aqui-->
-						<div id="tarefa-1" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+						<!--as tarefas ficam aqui-->
+						<div id="tarefa-1" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
 							<span>HTML & CSS</span>
 						</div>
-						<div id="tarefa-2" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+						<div id="tarefa-2" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
 							<span>javaScript</span>
 						</div>
 					</div>
-					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
-				<div id="coluna-3" class="coluna"> <!--é o conteiner das tarefas em forma de post-it-->
+				<div id="coluna-3" class="fluxo-de-trabalho">
 					<div class="header">
-						<button type="button" class="editarColuna" onclick="editarColuna(this)"><i class="material-icons">edit</i></button>
+						<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">edit</i></button>
 						<span>Concluído</span>
 						<span class="contador"></span>
 					</div>
 
-					<div class="post-its" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-						<!--as tarefas ficarão aqui-->
-						<div id="tarefa-3" class="post" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluirTarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+						<!--as tarefas ficam aqui-->
+						<div id="tarefa-3" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
 							<span>webStorageAPI</span>
 						</div>
 					</div>
-					<button type="button" class="add-post-it" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 			</div>
 		</div>
 
-		<dialog id="janela-editar-fluxo-de-trabalho"> <!--caixa de diálogo personalizada para editar coluna-->
+		<dialog id="janela-editar-fluxo-de-trabalho">
 			<div class="janela-header">
 				<span>Editar Fluxo de Trabalho</span>
 				<button type="button" class="cancelar" onclick="cancelar()"><i class="material-icons">close</i></button>
@@ -86,36 +86,8 @@
 				<input type="text" id="input"></input>
 			</div>
 			<div class="janela-footer">
-				<button type="button" class="excluir" onclick="excluirColuna(this)">excluir</button>
-				<button type="button" class="salvar" onclick="salvarColuna(this)">salvar</button>
-			</div>
-		</dialog>
-		
-		<dialog id="janela-novo-fluxo-de-trabalho"> <!--caixa de diálogo personalizada para receber os textos de novos fluxos de trabalho-->
-			<div class="janela-header">
-				<span>Novo Fluxo de Trabalho</span>
-				<button type="button" class="cancelar" onclick=""><i class="material-icons">close</i></button>
-			</div>
-			<div class="janela-body">
-				<label for="input"></label>
-				<input type="text" id=""></input>
-			</div>
-			<div class="janela-footer">
-				<button type="button" class="" onclick="">salvar</button>
-			</div>
-		</dialog>
-		
-		<dialog id="janela-nova-tarefa"> <!--caixa de diálogo personalizada para receber os textos de novas tarefas-->
-			<div class="janela-header">
-				<span>Nova Tarefa</span>
-				<button type="button" class="cancelar" onclick=""><i class="material-icons">close</i></button>
-			</div>
-			<div class="janela-body">
-				<label for="input"></label>
-				<input type="text" id=""></input>
-			</div>
-			<div class="janela-footer">
-				<button type="button" class="" onclick="">salvar</button>
+				<button type="button" class="excluir-fluxo-de-trabalho" onclick="excluirFluxoDeTrabalho(this)">excluir</button>
+				<button type="button" class="salvar-fluxo-de-trabalho" onclick="salvarFluxoDeTrabalho(this)">salvar</button>
 			</div>
 		</dialog>
 		<script type="text/javascript" src="script.js"></script>
