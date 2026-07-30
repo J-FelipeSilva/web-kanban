@@ -4,16 +4,14 @@
   --header: #00000026;
   --coluna: #ebecf0;
   --post-it: #ffee8c;
-  --tag-vermelho: #eb5a46;
-  --tag-verde: #61bd4f;
-  --tag-azul: #0079bf;
-  --tag-amarelo: #f2d600;
+  --vermelho: #eb5a46;
+  --verde: #61bd4f;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0; /*remove a margem padrão do navegador para todos os elementos*/
-  padding: 0; /*remove o padding padrão do navegador para todos os elementos*/
+  margin: 0px; /*remove a margem padrão do navegador para todos os elementos*/
+  padding: 0px; /*remove o padding padrão do navegador para todos os elementos*/
 }
 
 body {
@@ -52,10 +50,10 @@ header {
 
 /*quadro Kanban*/
 .quadro {
-  display: flex; /*permite que o quadro seja dividido*/
+  display: flex;
   flex-grow: 1; /*preenche o espaço que sobra no layout*/
   padding: 20px;
-  gap: 20px; /*cria os espaços entre as colunas de fluxo de trabalho*/
+  gap: 20px;
   overflow-x: auto; /*permite scroll horizontal se houver muitas colunas*/
   align-items: flex-start; /*impede que as colunas estiquem até o final da tela*/
 }
@@ -63,8 +61,7 @@ header {
 .fluxo-de-trabalho {
   background-color: var(--coluna);
   border-radius: 8px;
-  min-width: 300px;
-  max-width: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -102,9 +99,10 @@ header {
 
 /*container em que as tarefas ficarão*/
 .caixa-de-tarefas {
-  padding: 0 10px 10px 10px;
+  padding: 0px 10px 10px 10px;
   overflow-y: auto; /*scroll vertical se a coluna estiver cheia*/
   display: flex;
+  min-height: 40px;
   flex-direction: column;
   gap: 10px;
 }
@@ -146,7 +144,7 @@ header {
   cursor: pointer;
   border: none;
   background: transparent;
-  color: var(--tag-vermelho);
+  color: var(--vermelho);
   position: absolute;
   right: 5px;
   top: 5px;
@@ -192,7 +190,6 @@ header {
 	padding: 10px 15px;
 	font-size: 1.5rem;
 	font-weight: bold;
-	color: var(--tag-azul);
 }
 .janela-body {
 	display: flex;
@@ -219,11 +216,11 @@ header {
   margin-right: 10px;
   color: #ffffffd9;
   background-color: transparent;
-  color: var(--tag-vermelho);
+  color: black;
   transition: background-color 0.2s;
 }
 .excluir-fluxo-de-trabalho:hover {
-	background-color: var(--tag-vermelho);
+	background-color: var(--vermelho);
 	color: white;
 }
 
@@ -235,11 +232,11 @@ header {
   border: none;
   margin-right: 10px;
   background-color: transparent;
-  color: var(--tag-verde);
+  color: black;
   transition: background-color 0.2s;
 }
 .salvar-fluxo-de-trabalho:hover {
-	background-color: var(--tag-verde);
+	background-color: var(--verde);
 	color: white;
 }
 
