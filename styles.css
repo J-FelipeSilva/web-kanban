@@ -200,6 +200,10 @@ header {
 	flex-direction: column;
 }
 
+.input {
+	height: 24px;
+}
+
 .janela-footer {
 	display: flex;
 	justify-content: space-between;
