@@ -35,7 +35,7 @@ app.get('/carregar', (req, res) => {
             res.status(500).send({ erro: 'Erro ao buscar dados' });
             return;
         }
-        // Converte a string de tarefas de volta para o formato de array/JSON que o JS entende
+        //converte a string de tarefas de volta para o formato de array/JSON que o javaScript entende
         const dadosFormatados = rows.map(row => ({
             id: row.id,
             titulo: row.titulo,
