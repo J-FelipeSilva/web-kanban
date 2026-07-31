@@ -28,9 +28,17 @@
 
 					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
 						<!--as tarefas ficam aqui-->
-						<div id="tarefa-4" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+						<div id="tarefa-5" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
 							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
-							<span>Integração com DB e AI</span>
+							<span>Criar o arquivo principal do servirdor e configurá-lo</span>
+						</div>
+						<div id="tarefa-6" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+							<span>Escrever as rotas básicas da API REST para gerenciar GET, POST, PUT e DELETE</span>
+						</div>
+						<div id="tarefa-7" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+							<span>Implementar chamadas assíncronas utilizando API Fetch</span>
 						</div>
 					</div>
 					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
@@ -39,19 +47,15 @@
 				<div id="coluna-2" class="fluxo-de-trabalho">
 					<div class="header">
 						<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">menu</i></button>
-						<span>Em Andamento</span>
+						<span>Em Desenvolvimento</span>
 						<span class="contador"></span>
 					</div>
 
 					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
 						<!--as tarefas ficam aqui-->
-						<div id="tarefa-1" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
-							<span>HTML & CSS</span>
-						</div>
-						<div id="tarefa-2" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
-							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
-							<span>javaScript</span>
+						<div id="tarefa-4" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
+							<span>Criar uma interface de edição e criação de elementos do quadro Kanban utilizando a tag \<dialog\></span>
 						</div>
 					</div>
 					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
@@ -66,9 +70,17 @@
 
 					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
 						<!--as tarefas ficam aqui-->
+						<div id="tarefa-1" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+							<span>Criar o arquivo HTML base e estruturar o Kanban com três fluxos de trabalho: "A Fazer", "Em Desenvolvimento" e "Concluído"</span>
+						</div>
+						<div id="tarefa-2" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
+							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
+							<span>Criar o arquivo CSS do layout, estruturar visualmente o quadro de tarefas</span>
+						</div>
 						<div id="tarefa-3" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
 							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
-							<span>webStorageAPI</span>
+							<span>Criar o arquivo JS para manipular o DOM dinamicamente</span>
 						</div>
 					</div>
 					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
