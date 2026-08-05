@@ -51,11 +51,11 @@ header {
 /*quadro Kanban*/
 .quadro {
   display: flex;
-  flex-grow: 1; /*preenche o espaço que sobra no layout*/
+  flex-grow: 1;
   padding: 20px;
   gap: 20px;
-  overflow-x: auto; /*permite scroll horizontal se houver muitas colunas*/
-  align-items: flex-start; /*impede que as colunas estiquem até o final da tela*/
+  overflow-x: auto;
+  align-items: flex-start;
 }
 
 .fluxo-de-trabalho {
@@ -100,7 +100,7 @@ header {
 /*container em que as tarefas ficarão*/
 .caixa-de-tarefas {
   padding: 0px 10px 10px 10px;
-  overflow-y: auto; /*scroll vertical se a coluna estiver cheia*/
+  overflow-y: auto;
   display: flex;
   min-height: 40px;
   flex-direction: column;
@@ -123,7 +123,7 @@ header {
   white-space: normal;
   display: inline-block;
   line-height: 1.4;
-  word-break: break-word; /*quebra a palavra se ela for maior que o post-it*/
+  word-break: break-word;
 }
 
 /*botão de adicionar tarefa*/
@@ -172,7 +172,7 @@ header {
 }
 
 /*interface de edição de fluxo de trabalho*/
-#janela-editar-fluxo-de-trabalho {
+#janela-editar-fluxo-de-trabalho, #janela-add-fluxo-de-trabalho, #janela-add-tarefa {
 	position: fixed;
 	top: 50%; /*muda a posição do ponto (0,0) da janela em relação ao eixo vertical*/
 	left: 50%; /*muda a posição do ponto (0,0) da janela em relação ao eixo hotizontal*/
@@ -182,7 +182,7 @@ header {
 	width: 400px;
 	background-color: var(--coluna);
 }
-#janela-editar-fluxo-de-trabalho::backdrop {
+#janela-editar-fluxo-de-trabalho::backdrop, #janela-add-fluxo-de-trabalho::backdrop, #janela-add-tarefa::backdrop {
 	background-color: #00000070;
 }
 

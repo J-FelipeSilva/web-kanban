@@ -1,8 +1,11 @@
-<!DOCTYPE html> <!--indica que formato do documento é HTML5-->
-<html lang="pt-BR"> <!--o atributo lang define o idioma do documento como português do Brasil-->
+<!DOCTYPE html>
+<!--o atributo lang define o idioma do documento como português do Brasil-->
+<html lang="pt-BR">
 	<head>
-		<meta charset="UTF-8"> <!--garante que o navegador interprete corretamente os caracteres especiais do documento-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--garante que o layout seja responsivo-->
+		<!--garante que o navegador interprete corretamente os caracteres especiais do documento-->
+		<meta charset="UTF-8">
+		<!--garante que o layout seja responsivo-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Web Kanban</title>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -13,12 +16,15 @@
 			<span>Quadro Kanban</span>
 		</header>
 		
-		<div class="layout-principal"> <!--é o container principal-->
-			<div id ="menu-vertical" class="menu-vertical"> <!--é o container onde ficará a integração com AI, separar os sprints no futuro-->
-				<button type="button" class="add-fluxo-de-trabalho" onclick="criarFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
+		<!--é o container principal-->
+		<div class="layout-principal">
+			<!--é o container onde ficará a integração com AI, separar os sprints-->
+			<div id ="menu-vertical" class="menu-vertical">
+				<button type="button" class="add-fluxo-de-trabalho" onclick="addFluxoDeTrabalho()">+ Adicionar Fluxo de Trabalho</button>
 			</div>
 			
-			<div id="quadro" class="quadro"> <!--é o container de cada fluxo de trabalho no quadro Kanban-->
+			<!--é o container de cada fluxo de trabalho no quadro Kanban-->
+			<div id="quadro" class="quadro">
 				<div id="coluna-1" class="fluxo-de-trabalho">
 					<div class="header">
 						<button type="button" class="editar-fluxo-de-trabalho" onclick="editarFluxoDeTrabalho(this)"><i class="material-icons">menu</i></button>
@@ -26,7 +32,8 @@
 						<span class="contador"></span>
 					</div>
 
-					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+					<!--é o container das tarefas em forma de post-it-->
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 						<!--as tarefas ficam aqui-->
 						<div id="tarefa-5" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
 							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
@@ -41,7 +48,7 @@
 							<span>Implementar chamadas assíncronas utilizando API FETCH</span>
 						</div>
 					</div>
-					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="addTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
 				<div id="coluna-2" class="fluxo-de-trabalho">
@@ -51,14 +58,15 @@
 						<span class="contador"></span>
 					</div>
 
-					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+					<!--é o container das tarefas em forma de post-it-->
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 						<!--as tarefas ficam aqui-->
 						<div id="tarefa-4" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
 							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>	
 							<span>Criar uma interface de edição e criação de elementos do quadro Kanban utilizando a tag dialog</span>
 						</div>
 					</div>
-					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="addTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 
 				<div id="coluna-3" class="fluxo-de-trabalho">
@@ -68,7 +76,8 @@
 						<span class="contador"></span>
 					</div>
 
-					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"> <!--é o container das tarefas em forma de post-it-->
+					<!--é o container das tarefas em forma de post-it-->
+					<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 						<!--as tarefas ficam aqui-->
 						<div id="tarefa-1" class="tarefa" draggable="true" ondragstart="dragstartHandler(event)">
 							<button type="button" class="excluir-tarefa" onclick="excluirTarefa(this)"><i class="material-icons">close</i></button>
@@ -83,23 +92,52 @@
 							<span>Criar o arquivo JS para manipular o DOM dinamicamente</span>
 						</div>
 					</div>
-					<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+					<button type="button" class="add-tarefa" onclick="addTarefa(this)">+ Adicionar Tarefa</button>
 				</div>
 			</div>
 		</div>
 
+		<!--janela modal para editar o fluxo de trabalho-->
 		<dialog id="janela-editar-fluxo-de-trabalho">
 			<div class="janela-header">
 				<span>Editar Fluxo de Trabalho</span>
-				<button type="button" class="cancelar" onclick="cancelar()"><i class="material-icons">close</i></button>
+				<button type="button" class="cancelar" onclick="cancelar(this)"><i class="material-icons">close</i></button>
 			</div>
 			<div class="janela-body">
-				<label for="input"></label>
-				<input type="text" id="input" class="input"></input>
+				<label for="input-editar-fluxo-de-trabalho">Título:</label><br>
+				<input type="text" id="input-editar-fluxo-de-trabalho" class="input">
 			</div>
 			<div class="janela-footer">
-				<button type="button" class="excluir-fluxo-de-trabalho" onclick="excluirFluxoDeTrabalho(this)">excluir</button>
-				<button type="button" class="salvar-fluxo-de-trabalho" onclick="salvarFluxoDeTrabalho(this)">salvar</button>
+				<button type="button" class="excluir-fluxo-de-trabalho" onclick="excluirFluxoDeTrabalho()">excluir</button>
+				<button type="button" class="salvar-fluxo-de-trabalho" onclick="salvarFluxoDeTrabalho()">salvar</button>
+			</div>
+		</dialog>
+
+		<!--janela modal para adicionar uma nova tarefa-->
+		<dialog id="janela-add-tarefa">
+			<div class="janela-header">
+				<span>Adicionar Nova Tarefa</span>
+				<button type="button" class="cancelar" onclick="cancelar(this)"><i class="material-icons">close</i></button>
+			</div>
+			<div class="janela-body">
+				<input type="text" id="input-add-tarefa" class="input" placeholder="Descreva a tarefa">
+			</div>
+			<div class="janela-footer">
+				<button type="button" class="salvar-nova-tarefa" onclick="salvarNovaTarefa()">salvar</button>
+			</div>
+		</dialog>
+
+		<!--janela modal para adicionar um novo fluxo de trabalho-->
+		<dialog id="janela-add-fluxo-de-trabalho">
+			<div class="janela-header">
+				<span>Adicionar Novo Fluxo de Trabalho</span>
+				<button type="button" class="cancelar" onclick="cancelar(this)"><i class="material-icons">close</i></button>
+			</div>
+			<div class="janela-body">
+				<input type="text" id="input-add-fluxo-de-trabalho" class="input" placeholder="Título">
+			</div>
+			<div class="janela-footer">
+				<button type="button" class="salvar-novo-fluxo-de-trabalho" onclick="salvarNovoFluxoDeTrabalho()">salvar</button>
 			</div>
 		</dialog>
 		<script type="text/javascript" src="script.js"></script>

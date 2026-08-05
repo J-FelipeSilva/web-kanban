@@ -1,6 +1,8 @@
+//variáveis globais para armazenar informações fora das funções
 let colunaApontada;
 let spanApontado;
 
+//função para atualizar a quantidade de tarefas mostrada no contador
 function contador(coluna) {
 	const divCaixa = coluna.querySelector(".caixa-de-tarefas");
 	const quantidadeDeTarefas = divCaixa.querySelectorAll(".tarefa").length;
@@ -34,22 +36,37 @@ function dropHandler(event) {
 	salvarDados();
 }
 
-function criarTarefa(buttonElement) {
-	const texto = prompt("Descreva a tarefa");
-	if (texto===null || texto.trim()=="") {
-		return;
+//funções para criar e excluir tarefas
+//função para abrir a janela modal adicionar tarefa
+function addTarefa(buttonElement) {
+	colunaApontada = buttonElement.closest(".fluxo-de-trabalho");
+	const display = document.getElementById("janela-add-tarefa");
+	display.showModal();
+}
+//botão da janela de adicionar tarefa
+function salvarNovaTarefa() {
+	const input = document.getElementById("input-add-tarefa");
+	if (input.value.trim()!=="") {
+		criarTarefa(colunaApontada, input.value);
+		document.getElementById("janela-add-tarefa").close();
 	}
-	
+	//atualiza o contador do fluxo de trabalho
+	contador(colunaApontada);
+	salvarDados();
+}
+//função para criar a tarefa e adicionar no fluxo de trabalho
+function criarTarefa(colunaApontada, inputElement) {
 	//cria a nova tarefa
 	const newTarefa = document.createElement("div");
-	newTarefa.id = "tarefa-" + Date.now(); //cria um id único para cada nova tarefa
+	//cria um id único para cada nova tarefa
+	newTarefa.id = "tarefa-" + Date.now();
 	newTarefa.className = "tarefa";
 	newTarefa.setAttribute("draggable", "true");
 	newTarefa.setAttribute("ondragstart", "dragstartHandler(event)");
 	
 	//cria o local onde ficará o texto da terfa
 	const newSpan = document.createElement("span");
-	newSpan.innerText = texto;
+	newSpan.innerText = inputElement;
 	
 	//cria o botão de excluir tarefa
 	const newButton = document.createElement("button");
@@ -58,37 +75,53 @@ function criarTarefa(buttonElement) {
 	newButton.setAttribute("onclick", "excluirTarefa(this)");
 	newButton.innerHTML = "<i class=\"material-icons\">close</i>";
 	
-	//adiciona os elementos na caixa de tarefas
+	//adiciona os elementos da tarefa
 	newTarefa.appendChild(newSpan);
 	newTarefa.appendChild(newButton);
-	
+
 	//adiciona a tarefa no fluxo de trabalho dentro da caixa de tarefas
-	const coluna = buttonElement.closest(".fluxo-de-trabalho");
-	if (coluna) {
-		const colunaCerta = coluna.querySelector(".caixa-de-tarefas");
-		colunaCerta.appendChild(newTarefa);
-		contador(coluna); //atualiza o contador no fluxo de trabalho
-	}
+	const lugarCerto = colunaApontada.querySelector(".caixa-de-tarefas");
+	lugarCerto.appendChild(newTarefa);
+}
+function excluirTarefa(buttonElement) {
+	const post = buttonElement.closest(".tarefa");
+	const coluna = post.closest(".fluxo-de-trabalho");
+	//rmeove a tarefa da caixa de tarefas
+	post.remove();
+	//atualiza o contador do fluxo de trabalho
+	contador(coluna);
 	salvarDados();
 }
 
-function criarFluxoDeTrabalho() {
-	const texto = prompt("Título");
-	if (texto===null || texto.trim()=="") {
-		return;
+//funções para criar, editar e excluir um fluxo de trabalho
+//função para abrir a janela modal adicionar fluxo de trabalho
+function addFluxoDeTrabalho() {
+	const display = document.getElementById("janela-add-fluxo-de-trabalho");
+	display.showModal();
+}
+//botão da janela de adicionar fluxo de trabalho
+function salvarNovoFluxoDeTrabalho() {
+	const input = document.getElementById("input-add-fluxo-de-trabalho");
+	if (input.value.trim()!=="") {
+		criarFluxoDeTrabalho(input.value);
+		document.getElementById("janela-add-fluxo-de-trabalho").close();
 	}
-	
+	salvarDados();
+}
+//função para criar o fluxo de trabalho e adicionar ao quadro
+function criarFluxoDeTrabalho(inputElement) {
 	//cria uma nova coluna no quadro
 	const quadro = document.getElementById("quadro");
 	const newFluxoDeTrabalho = document.createElement("div");
-	newFluxoDeTrabalho.id = "coluna-" + Date.now(); //cria um id único para cada novo fluxo de trabalho
+	//cria um id único para cada novo fluxo de trabalho
+	newFluxoDeTrabalho.id = "coluna-" + Date.now();
 	newFluxoDeTrabalho.className = "fluxo-de-trabalho";
 	
 	//cria o cabeçalho do contador e título na nova coluna
 	const newHeader = document.createElement("div");
 	newHeader.className = "header";
 	const newSpan = document.createElement("span");
-	newSpan.innerText = (texto);
+	newSpan.innerText = inputElement;
 	
 	//cria o novo contador
 	const newSpanContador = document.createElement("span");
@@ -105,7 +138,7 @@ function criarFluxoDeTrabalho() {
 	const newButton = document.createElement("button");
 	newButton.setAttribute("type", "button");
 	newButton.className = "add-tarefa";
-	newButton.setAttribute("onclick", "criarTarefa(this)");
+	newButton.setAttribute("onclick", "addTarefa(this)");
 	newButton.innerText = "+ Adicionar Tarefa";
 	
 	//cria o botão de editar o fluxo de trabalho
@@ -123,24 +156,23 @@ function criarFluxoDeTrabalho() {
 	newHeader.appendChild(newSpanContador);
 	newFluxoDeTrabalho.appendChild(newCaixaDeTarefas);
 	newFluxoDeTrabalho.appendChild(newButton);
-	
-	salvarDados();
 }
 
+//função para abrir a janela modal edição do fluxo de trabalho
 function editarFluxoDeTrabalho(buttonElement) {
-	//utiliza variáveis para armazenar informações fora da função
 	colunaApontada = buttonElement.closest(".fluxo-de-trabalho");
 	spanApontado = colunaApontada.querySelector(".header span");
-	
+
 	const display = document.getElementById("janela-editar-fluxo-de-trabalho");
-	const input = document.getElementById("input");
+	const input = document.getElementById("input-editar-fluxo-de-trabalho");
 	input.value = spanApontado.innerText;
-	
+
 	display.showModal();
 }
-
-//funções do Modal
+//botões da janela de edição do fluxo de trabalho
 function salvarFluxoDeTrabalho() {
+	const input = document.getElementById("input-editar-fluxo-de-trabalho");
+
 	if (input.value.trim()!=="") {
 		spanApontado.innerText = input.value;
 		document.getElementById("janela-editar-fluxo-de-trabalho").close();
@@ -152,19 +184,14 @@ function excluirFluxoDeTrabalho() {
 	document.getElementById("janela-editar-fluxo-de-trabalho").close();
 	salvarDados();
 }
-function cancelar() {
-	document.getElementById("janela-editar-fluxo-de-trabalho").close();
+
+//função para fechar as janelas modais
+function cancelar(buttonElement) {
+	const janela = buttonElement.closest("dialog");
+	janela.close();
 }
 
-function excluirTarefa(buttonElement) {
-	const post = buttonElement.closest(".tarefa");
-	const coluna = post.closest(".fluxo-de-trabalho");
-	post.remove();
-	
-	contador(coluna);
-	salvarDados();
-}
-
+//funções para salvar e carregar dados do localStorage
 function salvarDados() {
 	const colunas = document.querySelectorAll(".fluxo-de-trabalho");
 	const dadosKanban = [];
@@ -235,7 +262,7 @@ function carregarDados() {
 				<div class="caixa-de-tarefas" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
 					${tarefasHtml}
 				</div>
-				<button type="button" class="add-tarefa" onclick="criarTarefa(this)">+ Adicionar Tarefa</button>
+				<button type="button" class="add-tarefa" onclick="addTarefa(this)">+ Adicionar Tarefa</button>
 			</div>
 		`;
 		quadro.insertAdjacentHTML("beforeend", colunaHtml);
