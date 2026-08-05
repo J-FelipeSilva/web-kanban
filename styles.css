@@ -76,7 +76,7 @@ header {
   align-items: center;
 }
 
-/*botão em ícone (lápis) para editar ou excluir um fluxo de trabalho*/
+/*botão em ícone para editar ou excluir um fluxo de trabalho*/
 .editar-fluxo-de-trabalho {
   cursor: pointer;
   border: none;
@@ -172,7 +172,7 @@ header {
   color: black;
 }
 
-/*interface de edição de fluxo de trabalho*/
+/*janela modal de edição de fluxo de trabalho e tarefas*/
 #janela-editar-fluxo-de-trabalho, #janela-add-fluxo-de-trabalho, #janela-add-tarefa {
 	position: fixed;
 	top: 50%; /*muda a posição do ponto (0,0) da janela em relação ao eixo vertical*/
@@ -180,7 +180,7 @@ header {
 	transform: translate(-50%, -50%); /*artifício para manter a janela no centro da tela*/
 	border: none;
 	border-radius: 8px;
-	width: 400px;
+	width: 480px;
 	background-color: var(--coluna);
 }
 #janela-editar-fluxo-de-trabalho::backdrop, #janela-add-fluxo-de-trabalho::backdrop, #janela-add-tarefa::backdrop {
@@ -199,15 +199,14 @@ header {
 	padding: 10px;
 	flex-direction: column;
 }
-
 .input {
 	height: 24px;
 }
-
 .janela-footer {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 10px 15px;
+	gap: 10px;
 }
 
 /*botão para excluir fluxo de trabalho*/
@@ -216,7 +215,7 @@ header {
   border-radius: 8px;
   cursor: pointer;
   border: none;
-  margin-right: 10px;
+  margin-right: auto;
   color: #ffffffd9;
   background-color: transparent;
   color: black;
@@ -227,23 +226,32 @@ header {
 	color: white;
 }
 
-/*botão para salvar alterações no fluxo de trabalho*/
+/*botão para salvar alterações no fluxo de trabalho e tarefas*/
 .salvar-fluxo-de-trabalho {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
-  margin-right: 10px;
+  margin-left: 10px;
   background-color: transparent;
   color: black;
   transition: background-color 0.2s;
 }
-.salvar-fluxo-de-trabalho:hover {
+.salvar-nova-tarefa, .salvar-novo-fluxo-de-trabalho {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: black;
+  transition: background-color 0.2s;
+}
+.salvar-fluxo-de-trabalho:hover, .salvar-nova-tarefa:hover, .salvar-novo-fluxo-de-trabalho:hover {
 	background-color: var(--verde);
 	color: white;
 }
 
-/*botão em (x) de cancelar janela*/
+/*botão em (x) de fechar a janela*/
 .cancelar {
   cursor: pointer;
   border: none;

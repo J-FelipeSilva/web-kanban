@@ -52,6 +52,8 @@ function salvarNovaTarefa() {
 	}
 	//atualiza o contador do fluxo de trabalho
 	contador(colunaApontada);
+	//retorna o input para vazio para não ficar com o texto digitado na última ação
+	input.value = "";
 	salvarDados();
 }
 //função para criar a tarefa e adicionar no fluxo de trabalho
@@ -106,6 +108,8 @@ function salvarNovoFluxoDeTrabalho() {
 		criarFluxoDeTrabalho(input.value);
 		document.getElementById("janela-add-fluxo-de-trabalho").close();
 	}
+	//retorna o input para vazio para não ficar com o texto digitado na última ação
+	input.value = "";
 	salvarDados();
 }
 //função para criar o fluxo de trabalho e adicionar ao quadro
@@ -188,6 +192,9 @@ function excluirFluxoDeTrabalho() {
 //função para fechar as janelas modais
 function cancelar(buttonElement) {
 	const janela = buttonElement.closest("dialog");
+	const input = janela.querySelector("input");
+	//retorna o input para vazio para não ficar com o texto digitado na última ação
+	input.value = "";
 	janela.close();
 }
 
@@ -249,7 +256,7 @@ function carregarDados() {
 			`;
 		}
 		
-		//variável para juntar os post-its da cada coluna
+		//variável para juntar os post-its de cada coluna
 		let tarefasHtml = "";
 		coluna.tarefas.forEach(dadosTarefa);
 		const colunaHtml = `
