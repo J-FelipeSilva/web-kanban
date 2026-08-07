@@ -1,7 +1,9 @@
 {
   "name": "web-kanban",
+  "description": "Gerenciador de tarefas em estilo Kanban",
+  "author": "João Felipe dos Santos Silva <joao.felipesilva@outlook.com>",
   "version": "1.0.0",
-  "description": "O projeto visa criar um gerenciador de tarefas no estilo kanban incorporando uma AI para sugerir sprints.",
+  "private": true,
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +13,6 @@
     "url": "git+https://github.com/J-FelipeSilva/web-kanban.git"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
