@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/J-FelipeSilva/web-kanban.git"
   },
-  "keywords": [],
-  "license": "ISC",
+  "keywords": ["kanban", "kanban-board-application"],
+  "license": "UNLICENSED",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/J-FelipeSilva/web-kanban/issues"
