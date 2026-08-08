@@ -283,4 +283,5 @@ function atualizarContagem() {
 	const contagem = document.querySelectorAll(".fluxo-de-trabalho");
 	contagem.forEach(contador);
 }
+document.addEventListener("DOMContentLoaded", atualizarContagem);
 document.addEventListener("DOMContentLoaded", carregarDados);
