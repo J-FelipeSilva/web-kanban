@@ -1,50 +1,105 @@
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-//faz o Node.js servir o index.html e styles.css
 app.use(express.static('.'));
 
-const db = new sqlite3.Database('./kanban.db');
+//INICIALIZAÇÃO DO BANCO DE DADOS
+const db = new sqlite3.Database('./kanban.db', (err) => {
+    if (err) console.error("Erro ao abrir banco de dados", err);
+});
 
+//CRIAÇÃO DAS TABELAS (Normalização)
 db.serialize(() => {
-    db.run("CREATE TABLE IF NOT EXISTS colunas (id TEXT, titulo TEXT, tarefas TEXT)");
+    // Tabela apenas para as colunas
+    db.run(`CREATE TABLE IF NOT EXISTS colunas (
+        id TEXT PRIMARY KEY,
+        titulo TEXT NOT NULL
+    )`);
+
+    // Tabela para as tarefas, com uma referência para a qual coluna ela pertence
+    db.run(`CREATE TABLE IF NOT EXISTS tarefas (
+        id TEXT PRIMARY KEY,
+        texto TEXT NOT NULL,
+        coluna_id TEXT,
+        FOREIGN KEY (coluna_id) REFERENCES colunas(id)
+    )`);
 });
 
-app.post('/salvar', (req, res) => {
-    const dadosKanban = req.body;
-    
-    db.run("DELETE FROM colunas", () => {
-        const stmt = db.prepare("INSERT INTO colunas VALUES (?, ?, ?)");
-        dadosKanban.forEach(coluna => {
-            stmt.run(coluna.id, coluna.titulo, JSON.stringify(coluna.tarefas));
+//Rota para buscar o quadro Kanban inteiro para montar a tela
+app.get('/api/kanban', (req, res) => {
+    // Primeiro busca todas as colunas
+    db.all("SELECT * FROM colunas", [], (err, colunas) => {
+        if (err) return res.status(500).json({ error: 'Erro ao buscar colunas' });
+
+        // Depois busca todas as tarefas
+        db.all("SELECT * FROM tarefas", [], (err, tarefas) => {
+            if (err) return res.status(500).json({ error: 'Erro ao buscar tarefas' });
+
+            // Monta o formato JSON que o Front-end espera:
+            // Cada coluna recebe um array "tarefas" filtrando apenas as tarefas que pertencem a ela
+            const quadroFormatado = colunas.map(coluna => {
+                return {
+                    id: coluna.id,
+                    titulo: coluna.titulo,
+                    tarefas: tarefas
+                        .filter(t => t.coluna_id === coluna.id)
+                        .map(t => ({ id: t.id, texto: t.texto })) // Formata a tarefa
+                };
+            });
+
+            res.json(quadroFormatado);
         });
-        stmt.finalize();
-        res.send({ mensagem: 'Dados salvos com sucesso!' });
     });
 });
 
-//essa rota busca os dados no banco e devolve para o front-end
-app.get('/carregar', (req, res) => {
-    db.all("SELECT * FROM colunas", [], (err, rows) => {
-        if (err) {
-            res.status(500).send({ erro: 'Erro ao buscar dados' });
-            return;
-        }
-        //converte a string de tarefas de volta para o formato de array/JSON que o javaScript entende
-        const dadosFormatados = rows.map(row => ({
-            id: row.id,
-            titulo: row.titulo,
-            tarefas: JSON.parse(row.tarefas)
-        }));
-        res.send(dadosFormatados);
+//Rota para CRIAR apenas UMA nova coluna
+app.post('/api/kanban/columns', (req, res) => {
+    const { titulo } = req.body;
+    
+    //Validação básica
+    if (!titulo) return res.status(400).json({ error: 'Título obrigatório' });
+
+    const id = `coluna-${Date.now()}`;
+    
+    //Insere apenas o novo registro, sem apagar o resto
+    db.run("INSERT INTO colunas (id, titulo) VALUES (?, ?)", [id, titulo], function(err) {
+        if (err) return res.status(500).json({ error: 'Erro ao salvar coluna no banco' });
+        
+        //Retorna a coluna criada com um array de tarefas vazio (pois acabou de nascer)
+        res.status(201).json({ id, titulo, tarefas: [] });
     });
 });
 
-app.listen(3000, () => {
-    console.log('Servidor rodando em http://localhost:3000');
+//Rota para CRIAR apenas UMA nova tarefa dentro de uma coluna
+app.post('/api/kanban/tasks', (req, res) => {
+    const { colunaId, texto } = req.body;
+    
+    //Validação básica
+    if (!colunaId || !texto) return res.status(400).json({ error: 'colunaId e texto são obrigatórios' });
+
+    const id = `tarefa-${Date.now()}`;
+
+    //Verifica se a coluna realmente existe antes de adicionar a tarefa
+    db.get("SELECT id FROM colunas WHERE id = ?", [colunaId], (err, row) => {
+        if (err) return res.status(500).json({ error: 'Erro ao consultar banco' });
+        if (!row) return res.status(404).json({ error: 'Coluna não encontrada' });
+
+        //Insere a tarefa no banco, vinculando ao ID da coluna
+        db.run("INSERT INTO tarefas (id, texto, coluna_id) VALUES (?, ?, ?)", [id, texto, colunaId], function(err) {
+            if (err) return res.status(500).json({ error: 'Erro ao salvar tarefa' });
+            
+            res.status(201).json({ id, texto });
+        });
+    });
+});
+
+//INICIALIZAÇÃO DO SERVIDOR
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Servidor Kanban rodando em http://localhost:${port}`);
 });
