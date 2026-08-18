@@ -15,7 +15,8 @@
 }
 
 body {
-  font-family: Aptos, Tahoma, Helvetia, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Verdana", sans-serif;
+	line-height: 1.4;
   background-color: var(--body);
   display: flex;
   flex-direction: column;
@@ -123,7 +124,6 @@ header {
 .tarefa span {
   white-space: normal;
   display: inline-block;
-  line-height: 1.4;
   word-break: break-word;
 }
 
