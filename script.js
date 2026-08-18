@@ -192,7 +192,7 @@ function excluirFluxoDeTrabalho() {
 //função para fechar as janelas modais
 function cancelar(buttonElement) {
 	const janela = buttonElement.closest("dialog");
-	const input = janela.querySelector("input");
+	const input = janela.querySelector("input, textarea");
 	//retorna o input para vazio para não ficar com o texto digitado na última ação
 	input.value = "";
 	janela.close();
