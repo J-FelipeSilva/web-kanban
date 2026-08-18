@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: "Roboto", "Arial", "Verdana", sans-serif;
+  font-family: "Aptos", "Arial", "Roboto", "Verdana", sans-serif;
   line-height: 1.4;
   background-color: var(--body);
   display: flex;
